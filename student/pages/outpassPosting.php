@@ -124,6 +124,7 @@ include('../Menu.php');
                 var leavingDateAndTime = $("#leavingDateAndTime").val();
                 var permissionType = $("#permissionType").val();
                 var rollNumber = "<?php echo $rollNumber ?>";
+                var userId = <?php echo $userId ?>;
                 console.log("Hello");
                 $.ajax({
                     url: '../functions.php',
@@ -135,6 +136,7 @@ include('../Menu.php');
                         reason: reason,
                         contact: contact,
                         rollNumber:rollNumber,
+                        userId:userId,
                         Function: "submitOutpassForm"
                     },
                     success: function(response) {

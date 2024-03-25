@@ -235,7 +235,7 @@
 include "../Includes/conn.php";
 
 //===================================================================================================
-$query = "SELECT * FROM `perpermissions_details` WHERE `status`='ACCEPTED' ORDER BY `sno` DESC ";
+$query = "SELECT * FROM `permission_details` WHERE `status`='ACCEPTED' ORDER BY `sno` DESC ";
 $sql = mysqli_query($conn, $query);
 
 //===================================================================================================
@@ -254,7 +254,7 @@ while ($row = mysqli_fetch_array($sql)) {
             <td>" . $row['leavingdatetime'] . "</td>
             <td>" . $row['returndatetime'] . "</td>
             <td>" . $row['place'] . "</td>
-            <td>" . $row['contacnumber'] . "</td>
+            <td>" . $row['contactnumber'] . "</td>
           </tr>";
 }
 
@@ -263,7 +263,7 @@ while ($row = mysqli_fetch_array($sql)) {
 			//   include "../Includes/conn.php";
 			  
 			//   //===================================================================================================
-			//   $query = "SELECT * FROM `perpermissions_details` WHERE `status`='ACCEPTED' ORDER BY `sno` DESC ";
+			//   $query = "SELECT * FROM `permission_details` WHERE `status`='ACCEPTED' ORDER BY `sno` DESC ";
 			//   $sql = mysqli_query($conn, $query);
 			  
 			//   //===================================================================================================
@@ -275,7 +275,7 @@ while ($row = mysqli_fetch_array($sql)) {
 			// 		echo "<tr  scope='row'>
 			// 			<td>".$row['rollnumber']."</td><td>".$row['studentname']."</td><td>".$row['stream']."</td><td>".$row['permissiontype']."</td>
 			// 			<td>".$row['reason']."</td><td>".$row['leavingdatetime']."</td> <td>".$row['returndatetime']."</td> 
-			// 			<td>".$row['place']."</td> <td>".$row['contacnumber']."</td>
+			// 			<td>".$row['place']."</td> <td>".$row['contactnumber']."</td>
 			// 			</tr>";
 			//   }
 

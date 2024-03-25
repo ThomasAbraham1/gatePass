@@ -13,8 +13,9 @@ if (isset($_POST["Function"])) {
             $reason = $_POST['reason'];
             $contact = $_POST['contact'];
             $rollNumber = $_POST['rollNumber'];
+            $userId = $_POST['userId'];
             global $conn;
-            $sql = "INSERT INTO `perpermissions_details` (`sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `place`, `reason`, `contacnumber`, `status`, `outtime`, `datm`) VALUES (NULL, '$rollNumber',  '$permissionType', '$leavingDateAndTime', '$place', '$reason', '$contact', 1,'', current_timestamp())";
+            $sql = "INSERT INTO `permission_details` (`permissiondetailsid`,`sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `place`, `reason`, `contactnumber`, `status`, `outtime`, `datm`) VALUES (NULL,$userId, '$rollNumber',  '$permissionType', '$leavingDateAndTime', '$place', '$reason', '$contact', 1,'', current_timestamp())";
             $result = mysqli_query($conn, $sql);
             if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
             // close database connection

@@ -6,7 +6,7 @@ if (!isset($_SESSION['user_id'])) {
     header('location:../Includes/logout.php');
 }
 $sno = $_GET['q'];
-$query = "UPDATE `perpermissions_details` SET `status`='ACCEPTED'  WHERE `sno`= '$sno'";
+$query = "UPDATE `permission_details` SET `status`='ACCEPTED'  WHERE `sno`= '$sno'";
 $sql = mysqli_query($conn, $query);
 if ($sql) {
     echo '<script>alert("Request Accepted")</script>';

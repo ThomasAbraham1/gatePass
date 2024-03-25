@@ -30,7 +30,7 @@ if (isset($_POST["Function"])) {
                 }
             }
 
-            $sql = "INSERT INTO `student_details` (`sno`, `studentname`, `rollnumber`, `dateofbirth`, `stream`, `branch`, `father/guardianname`, `father/guardiannumber`, `address`, `datm`, `classadvisor`) VALUES ($studentid, '$studentName', '$rollNumber', '$dateOfBirth', '$course', '$department', '$fatherGuardianName', '$fatherGuardianNumber', '$address', current_timestamp(), '$classAdvisorName')";
+            $sql = "INSERT INTO `student_details` (`studentdetailsid`,`sno`, `studentname`, `rollnumber`, `dateofbirth`, `stream`, `branch`, `father/guardianname`, `father/guardiannumber`, `address`, `datm`, `classadvisor`) VALUES (NULL,$studentid, '$studentName', '$rollNumber', '$dateOfBirth', '$course', '$department', '$fatherGuardianName', '$fatherGuardianNumber', '$address', current_timestamp(), '$classAdvisorName')";
             $result = mysqli_query($conn, $sql);
             if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
             // close database connection
@@ -38,5 +38,25 @@ if (isset($_POST["Function"])) {
             return "OK";
         }
         echo registerStudent();
+    }
+
+
+
+    if ($_POST["Function"] == "setStaffApproval") {
+        function setStaffApproval()
+        {
+            $requestStatus = $_POST['requestStatus'];
+            $requestId = $_POST['requestId'];
+
+            global $conn;
+            $sql = "UPDATE `permission_details` SET `status` = '$requestStatus' WHERE `permission_details`.`permissiondetailsid` = $requestId";
+            $result = mysqli_query($conn, $sql);
+            if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
+            // close database connection
+            mysqli_close($conn);
+            if(!$requestStatus) return "Approval Rejected";
+            return "OK";
+        }
+        echo setStaffApproval();
     }
 }

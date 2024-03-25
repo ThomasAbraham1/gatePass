@@ -210,7 +210,7 @@ if (!isset($_SESSION['security'])) {
             $sq = mysqli_query($conn, $qu);
             $r = mysqli_fetch_array($sq);
             //===================================================================================================
-            $query = "SELECT * FROM `perpermissions_details` WHERE `status`='ACCEPTED' ORDER BY `sno` DESC ";
+            $query = "SELECT * FROM `permission_details` WHERE `status`='ACCEPTED' ORDER BY `sno` DESC ";
             $sql = mysqli_query($conn, $query);
             //===================================================================================================
             while ($row = mysqli_fetch_array($sql)) {

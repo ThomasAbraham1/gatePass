@@ -19,7 +19,7 @@ if (!isset($_GET['q'])) {
 $sno = $_GET['q'];
 
 // Fetch the details of the permission record
-$query = "SELECT * FROM `perpermissions_details` WHERE `sno` = ?";
+$query = "SELECT * FROM `permission_details` WHERE `sno` = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $sno);
 $stmt->execute();

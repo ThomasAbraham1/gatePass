@@ -236,7 +236,7 @@
 			  include "../Includes/conn.php";
 			  
 			  //===================================================================================================
-			  $query = "SELECT * FROM `perpermissions_details` WHERE `status`='PENDING' ORDER BY `sno` DESC ";
+			  $query = "SELECT * FROM `permission_details` WHERE `status`='PENDING' ORDER BY `sno` DESC ";
 			  $sql = mysqli_query($conn, $query);
 			  
 			  //===================================================================================================
@@ -255,7 +255,7 @@
 						  <td>" . $row['leavingdatetime'] . "</td>
 						  <td>" . $row['returndatetime'] . "</td>
 						  <td>" . $row['place'] . "</td>
-						  <td>" . $row['contacnumber'] . "</td>
+						  <td>" . $row['contactnumber'] . "</td>
 						  <td><a class='btn btn-success' href='acceptdata.php?q=" . $row['sno'] . "'>Accept</a></td>
 						  <td><a class='btn btn-danger' href='rejectreason.php?q=" . $row['sno'] . "'>Reject</a></td>
 					   </tr>";
@@ -269,7 +269,7 @@
 			// 	$sq=mysqli_query($conn,$qu);
 			// 	$r=mysqli_fetch_array($sq);
 			//   //===================================================================================================
-			// 	$query="SELECT * FROM `perpermissions_details` WHERE `status`='PENDING' ORDER BY `sno` DESC ";
+			// 	$query="SELECT * FROM `permission_details` WHERE `status`='PENDING' ORDER BY `sno` DESC ";
 			// 	$sql=mysqli_query($conn,$query);
 			//   //===================================================================================================
 			//   while($row = mysqli_fetch_array($sql))
@@ -277,7 +277,7 @@
 			// 		echo "<tr  scope='row'>
 			// 			<td>".$row['rollnumber']."</td><td>".$r['studentname']."</td><td>".$r['stream']."</td><td>".$row['permissiontype']."</td>
 			// 			<td>".$row['reason']."</td><td>".$row['leavingdatetime']."</td> <td>".$row['returndatetime']."</td> 
-			// 			<td>".$row['place']."</td> <td>".$row['contacnumber']."</td>
+			// 			<td>".$row['place']."</td> <td>".$row['contactnumber']."</td>
 			// 			<td><a class='btn btn-success' href='acceptdata.php?q=".$row['sno']."'>Accept</a></td>
 			// 			<td><a class='btn btn-danger' href='rejectreason.php?q=".$row['sno']."'>Reject</a></td>
 			// 		 </tr>";

@@ -86,7 +86,7 @@
                            </a>
                            <h2 class="mb-2 text-center">Gate Pass Log In</h2>
                            <p class="text-center">Login to stay connected.</p>
-                           <form id="loginForm">
+                           <form id="loginForm" class="mb-2">
                               <div class="row">
                                  <div class="col-lg-12">
                                     <div class="form-group">
@@ -229,7 +229,7 @@
                         if(response == 'student') window.location.href = "/gatePass/" + response+ "/pages/homePage.php";
                         if(response == 'advisor') window.location.href = "/gatePass/" + response+ "/pages/homePage.php";
                      } else {
-                        $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
+                        $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${responseMsg}</div>`);
                      }
                     //  setTimeout(function() {
                     //     $("#Result").html('');

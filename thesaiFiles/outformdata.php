@@ -12,11 +12,11 @@ $leavingdatetime=$_POST['leavingdatetime'];
 $returndatetime=$_POST['returndatetime'];
 $place=$_POST['place'];
 $reason=$_POST['reason'];
-$contacnumber=$_POST['contacnumber'];
+$contactnumber=$_POST['contactnumber'];
 $status="PENDING";
 //============================================================================
-$insert="INSERT INTO `perpermissions_details`(`rollnumber`, `permissiontype`, `leavingdatetime`, `returndatetime`, `place`, `reason`, `contacnumber`, `status`) VALUES 
-('$rollnumber','$permissiontype','$leavingdatetime','$returndatetime','$place','$reason','$contacnumber','$status')";
+$insert="INSERT INTO `permission_details`(`rollnumber`, `permissiontype`, `leavingdatetime`, `returndatetime`, `place`, `reason`, `contactnumber`, `status`) VALUES 
+('$rollnumber','$permissiontype','$leavingdatetime','$returndatetime','$place','$reason','$contactnumber','$status')";
 $sql=mysqli_query($conn,$insert);
 //============================================================================
 

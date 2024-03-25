@@ -234,7 +234,7 @@
 			  include "../Includes/conn.php";
 			  
 			  //===================================================================================================
-			  $query = "SELECT * FROM `perpermissions_details` WHERE `status` NOT IN ('ACCEPTED', 'PENDING') ORDER BY `sno` DESC ";
+			  $query = "SELECT * FROM `permission_details` WHERE `status` NOT IN ('ACCEPTED', 'PENDING') ORDER BY `sno` DESC ";
 			  $sql = mysqli_query($conn, $query);
 			  
 			  //===================================================================================================
@@ -253,7 +253,7 @@
 						  <td>" . $row['leavingdatetime'] . "</td>
 						  <td>" . $row['returndatetime'] . "</td>
 						  <td>" . $row['place'] . "</td>
-						  <td>" . $row['contacnumber'] . "</td>
+						  <td>" . $row['contactnumber'] . "</td>
 						  <td>" . $row['status'] . "</td>
 						</tr>";
 			  }
@@ -266,7 +266,7 @@
 			// 	$sq=mysqli_query($conn,$qu);
 			// 	$r=mysqli_fetch_array($sq);
 			//   //===================================================================================================
-			// 	$query="SELECT * FROM `perpermissions_details` WHERE `status`!='ACCEPTED' AND `status`!='PENDING'  ORDER BY `sno` DESC ";
+			// 	$query="SELECT * FROM `permission_details` WHERE `status`!='ACCEPTED' AND `status`!='PENDING'  ORDER BY `sno` DESC ";
 			// 	$sql=mysqli_query($conn,$query);
 			//   //===================================================================================================
 			//   while($row = mysqli_fetch_array($sql))
@@ -274,7 +274,7 @@
 			// 		echo "<tr  scope='row'>
 			// 			<td>".$row['rollnumber']."</td><td>".$r['studentname']."</td><td>".$r['stream']."</td><td>".$row['permissiontype']."</td>
 			// 			<td>".$row['reason']."</td><td>".$row['leavingdatetime']."</td> <td>".$row['returndatetime']."</td> 
-			// 			<td>".$row['place']."</td> <td>".$row['contacnumber']."</td><td>".$row['status']."</td>
+			// 			<td>".$row['place']."</td> <td>".$row['contactnumber']."</td><td>".$row['status']."</td>
 			// 			</tr>";
 			//   }
 

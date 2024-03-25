@@ -6,7 +6,7 @@ if(!isset($_SESSION['student'])){
 	header('location:logout.php');
 }
 $sno=$_GET['q'];
-$query="DELETE FROM `perpermissions_details` WHERE `sno`= '$sno' AND `status`='PENDING'";
+$query="DELETE FROM `permission_details` WHERE `sno`= '$sno' AND `status`='PENDING'";
 $sql=mysqli_query($conn,$query);
 if ($sql) {
 	echo "<script>window.location='./studentid.php';</script>";

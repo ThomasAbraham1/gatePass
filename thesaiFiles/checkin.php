@@ -9,7 +9,7 @@ date_default_timezone_set("Asia/Calcutta");
 $checkin=date("Y-m-d h:i:sa");
 //$checkin=date("F d, Y h:i:s A", $timestamp);
 $sno=$_GET['q'];
-$query="UPDATE `perpermissions_details` SET `intime`='$checkin'  WHERE `sno`= '$sno' AND `intime`=''  AND `outtime`!=''";
+$query="UPDATE `permission_details` SET `intime`='$checkin'  WHERE `sno`= '$sno' AND `intime`=''  AND `outtime`!=''";
 $sql=mysqli_query($conn,$query);
 if ($sql) {
    // echo '<script>alert("Check out successfully ")</script>';

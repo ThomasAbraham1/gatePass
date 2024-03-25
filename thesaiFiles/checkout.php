@@ -11,7 +11,7 @@ $checkout=date("Y-m-d h:i:sa");
 
 
 $sno=$_GET['q'];
-$query="UPDATE `perpermissions_details` SET `outtime`='$checkout'  WHERE `sno`= '$sno' AND `outtime`=''";
+$query="UPDATE `permission_details` SET `outtime`='$checkout'  WHERE `sno`= '$sno' AND `outtime`=''";
 $sql=mysqli_query($conn,$query);
 if ($sql) {
    // echo '<script>alert("Check out successfully ")</script>';

@@ -213,14 +213,14 @@
 		
 
 			  //===================================================================================================
-				$query="SELECT * FROM `perpermissions_details`  ORDER BY `sno` DESC ";
+				$query="SELECT * FROM `permission_details`  ORDER BY `sno` DESC ";
 				$sql=mysqli_query($conn,$query);
 			  //===================================================================================================
 			  while($row = mysqli_fetch_array($sql))
 			  {
 					echo "<tr  scope='row'>
 						<td>".$row['sno']."</td><td>".$row['reason']."</td><td>".$row['leavingdatetime']."</td>
-						<td>".$row['returndatetime']."</td><td>".$row['place']."</td> <td>".$row['contacnumber']."</td> 
+						<td>".$row['returndatetime']."</td><td>".$row['place']."</td> <td>".$row['contactnumber']."</td> 
                         <td>".$row['status']."</td> <td>".$row['intime']."</td><td>".$row['outtime']."</td>
                         <td><a class='btn btn-secondary' href='removerequest.php?q=".$row['sno']."'>Remove</a></td>
 						</tr>";

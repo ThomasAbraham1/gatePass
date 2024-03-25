@@ -215,8 +215,8 @@ include "../Includes/conn.php";
 $query="SELECT COUNT(`rollnumber`) AS `total` FROM `student_details` ";
 $sql=mysqli_query($conn,$query);
 $row=mysqli_fetch_array($sql);
-//===============================================================================SELECT DISTINCT(`rollnumber`) FROM `perpermissions_details` WHERE `outtime`!=''AND `intime`=''
-$query2="SELECT COUNT(`rollnumber`) AS `total` FROM `perpermissions_details` WHERE (SELECT DISTINCT(`rollnumber`) FROM `perpermissions_details` WHERE `outtime`!=''AND `intime`='')";
+//===============================================================================SELECT DISTINCT(`rollnumber`) FROM `permission_details` WHERE `outtime`!=''AND `intime`=''
+$query2="SELECT COUNT(`rollnumber`) AS `total` FROM `permission_details` WHERE (SELECT DISTINCT(`rollnumber`) FROM `permission_details` WHERE `outtime`!=''AND `intime`='')";
 $sql2=mysqli_query($conn,$query2);
 ?>
 <div class="container">
@@ -267,7 +267,7 @@ $sql2=mysqli_query($conn,$query2);
 		</div>
 		<?PHP
 			include 'connect.php';
-			$sql = "SELECT `datm` FROM `perpermissions_details` WHERE `status`='ACCEPTED' AND  `permissiontype`='onehourpermission'";
+			$sql = "SELECT `datm` FROM `permission_details` WHERE `status`='ACCEPTED' AND  `permissiontype`='onehourpermission'";
 			$query = mysqli_query($conn,$sql);
 			
 			$curyear= date('Y');

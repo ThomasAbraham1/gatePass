@@ -48,10 +48,10 @@ INSERT INTO `login` (`sno`, `username`, `password`, `logintype`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `perpermissions_details`
+-- Table structure for table `permission_details`
 --
 
-CREATE TABLE `perpermissions_details` (
+CREATE TABLE `permission_details` (
   `sno` int(11) NOT NULL,
   `rollnumber` varchar(225) NOT NULL,
   `permissiontype` varchar(225) NOT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `perpermissions_details` (
   `returndatetime` varchar(225) NOT NULL,
   `place` varchar(225) NOT NULL,
   `reason` varchar(225) NOT NULL,
-  `contacnumber` varchar(220) NOT NULL,
+  `contactnumber` varchar(220) NOT NULL,
   `status` varchar(225) NOT NULL,
   `outtime` varchar(225) NOT NULL,
   `intime` varchar(225) NOT NULL,
@@ -67,10 +67,10 @@ CREATE TABLE `perpermissions_details` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `perpermissions_details`
+-- Dumping data for table `permission_details`
 --
 
-INSERT INTO `perpermissions_details` (`sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `returndatetime`, `place`, `reason`, `contacnumber`, `status`, `outtime`, `intime`, `datm`) VALUES
+INSERT INTO `permission_details` (`sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `returndatetime`, `place`, `reason`, `contactnumber`, `status`, `outtime`, `intime`, `datm`) VALUES
 (1, '18A51A0515', 'onehourpermission', '2020-03-19T13:00', '2020-03-20T01:00', 'vzm', 'Movie Time', '2147483647', 'not responded', '', '', '2020-03-05 15:17:11'),
 (2, '18A51A0515', 'homepermission', '2020-03-20T12:00', '2020-12-01T12:59', 'Srikakulam', 'Movie Time', '2147483647', 'ACCEPTED', '', '', '2020-03-05 14:26:56'),
 (8, '18A51A0515', 'onehourpermission', '2020-03-28T00:59', '2020-03-28T13:59', 'Srikakulam', 'Movie Time', '9491694195', 'not responded', '', '', '2020-03-05 17:07:21'),
@@ -113,9 +113,9 @@ ALTER TABLE `login`
   ADD PRIMARY KEY (`sno`);
 
 --
--- Indexes for table `perpermissions_details`
+-- Indexes for table `permission_details`
 --
-ALTER TABLE `perpermissions_details`
+ALTER TABLE `permission_details`
   ADD PRIMARY KEY (`sno`);
 
 --
@@ -136,9 +136,9 @@ ALTER TABLE `login`
   MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `perpermissions_details`
+-- AUTO_INCREMENT for table `permission_details`
 --
-ALTER TABLE `perpermissions_details`
+ALTER TABLE `permission_details`
   MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --

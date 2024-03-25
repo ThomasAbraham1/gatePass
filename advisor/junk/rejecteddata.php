@@ -7,7 +7,7 @@ if(!isset($_SESSION['user_id'])){
  }
 $sno=$_SESSION['id'];
 $reason=$_POST['rejectreason'];
-$query="UPDATE `perpermissions_details` SET `status`='$reason'  WHERE `sno`= '$sno'";
+$query="UPDATE `permission_details` SET `status`='$reason'  WHERE `sno`= '$sno'";
 $sql=mysqli_query($conn,$query);
 if ($sql) {
     echo '<script>alert("Request Rejected")</script>';
