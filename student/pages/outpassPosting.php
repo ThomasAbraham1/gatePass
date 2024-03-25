@@ -42,8 +42,8 @@ include('../Menu.php');
             <div class="col-md-12">
                 <div class="flex-wrap d-flex justify-content-between align-items-center">
                     <div>
-                        <h1>Student Registration</h1>
-                        <p>New students can be added to your class here.</p>
+                        <h1>Post Outpass Form</h1>
+                        <p>Students can post their outpass forms here.</p>
                     </div>
                     <!-- Button on the header -->
                     <!-- <div>
