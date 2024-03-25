@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 25, 2024 at 01:49 PM
+-- Generation Time: Mar 25, 2024 at 05:25 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -39,17 +39,12 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`sno`, `username`, `password`, `logintype`) VALUES
-(3, 'security', 'security', 'security'),
 (8, 'advisor@1', '5678', 'advisor'),
-(9, '950320104027', '950320104027', 'student'),
-(10, '950320104028', '950320104028', 'student'),
-(11, '950320104025', '950320104025', 'student'),
-(12, '950320104007', '950320104007', 'student'),
-(13, 'hod1@1', '5678', 'hod'),
 (15, 'Monkey King', '12312', 'student'),
-(16, '128731', '5678', 'student'),
-(17, '12312', '2343', 'student'),
-(22, '950320104303', '5678', 'student');
+(23, '950320104028', '5678', 'student'),
+(24, '950320104025', '5678', 'student'),
+(27, '950320104303', '5678', 'student'),
+(30, '123', '5678', 'student');
 
 -- --------------------------------------------------------
 
@@ -58,6 +53,7 @@ INSERT INTO `login` (`sno`, `username`, `password`, `logintype`) VALUES
 --
 
 CREATE TABLE `permission_details` (
+  `permissiondetailsid` int(11) NOT NULL,
   `sno` int(11) NOT NULL,
   `rollnumber` varchar(225) NOT NULL,
   `permissiontype` varchar(225) NOT NULL,
@@ -74,10 +70,10 @@ CREATE TABLE `permission_details` (
 -- Dumping data for table `permission_details`
 --
 
-INSERT INTO `permission_details` (`sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `place`, `reason`, `contactnumber`, `status`, `outtime`, `datm`) VALUES
-(11, '950320104028', 'homepermission', '2024-02-20T22:36', 'Tuty', 'Fever', '9122832323', 'ACCEPTED', '', '2024-02-20 17:09:40'),
-(16, '950320104025', 'homepermission', '2024-03-14T12:35', 'asda', 'adas', '1234123', 'ACCEPTED', '', '2024-03-25 07:10:07'),
-(18, '950320104303', 'Home Permission', '2024-03-25T18:08', 'Tenkasi', 'Visiting Tea Shop with Boys', '76987978978', '1', '', '2024-03-25 12:38:40');
+INSERT INTO `permission_details` (`permissiondetailsid`, `sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `place`, `reason`, `contactnumber`, `status`, `outtime`, `datm`) VALUES
+(1, 23, '950320104028', 'Home Permission', '2024-03-20T18:31', 'Super market', 'Going shopping', '982392834', '2', '', '2024-03-25 16:11:28'),
+(2, 24, '950320104025', 'Home Permission', '2024-03-25T18:32', 'Temple', 'Have fun in Kovil Thiruvila', '21830985', '0', '', '2024-03-25 16:11:24'),
+(3, 27, '950320104303', 'Home Permission', '2024-03-25T19:09', 'Tenkasi', 'Tea shop with area boys', '90812342342', '0', '', '2024-03-25 16:11:00');
 
 -- --------------------------------------------------------
 
@@ -86,7 +82,8 @@ INSERT INTO `permission_details` (`sno`, `rollnumber`, `permissiontype`, `leavin
 --
 
 CREATE TABLE `student_details` (
-  `sno` int(11) NOT NULL,
+  `studentdetailsid` int(11) NOT NULL,
+  `sno` int(10) NOT NULL,
   `studentname` varchar(225) NOT NULL,
   `rollnumber` varchar(225) NOT NULL,
   `dateofbirth` varchar(225) NOT NULL,
@@ -103,15 +100,11 @@ CREATE TABLE `student_details` (
 -- Dumping data for table `student_details`
 --
 
-INSERT INTO `student_details` (`sno`, `studentname`, `rollnumber`, `dateofbirth`, `stream`, `branch`, `father/guardianname`, `father/guardiannumber`, `address`, `datm`, `classadvisor`) VALUES
-(1, 'SriRam', '91111', '2001-05-16', 'b-e', 'ece', 'G V Naga raju', 2147483647, 'Arumuganeri', '2024-02-20 17:03:54', ''),
-(4, 'Thomas Abraham', '950320104028', '2002-05-26', 'b-e', 'cse', 'ThomasDAD', 2147483647, 'mullakadu,thoothukudi.', '2024-02-20 17:02:24', ''),
-(5, 'Sudhan', '950320104025', '2003-03-15', 'b-e', 'cse', 'Sudhandad', 2147483647, '2/3 east street, tuty', '2024-03-23 02:08:42', ''),
-(6, 'Gowtham', '950320104007', '2002-03-16', 'B.E', 'cse', 'Gowthamdad', 2147483647, 'muthaiyaburam,tuty', '2024-03-23 02:52:45', ''),
-(10, 'Monkey King', '212312', '2024-03-19', 'B.Tech', 'CSE', 'Thanthai', 12312, 'asdasd', '2024-03-25 10:48:48', 'advisor@1'),
-(11, 'monkey', '128731', '2024-03-20', 'B.Tech', 'CSE', 'JinderMahal', 1231, 'asdas', '2024-03-25 10:51:08', 'advisor@1'),
-(12, 'asdas', '12312', '2024-03-20', 'B.Tech', 'CSE', 'asdas', 12312, 'asdas', '2024-03-25 10:51:42', 'advisor@1'),
-(22, 'Muthu Raman', '950320104303', '1995-07-19', 'B.Tech', 'CSE', 'MuthuVel', 2147483647, 'Tenkasi, Tenkasi', '2024-03-25 12:31:10', 'advisor@1');
+INSERT INTO `student_details` (`studentdetailsid`, `sno`, `studentname`, `rollnumber`, `dateofbirth`, `stream`, `branch`, `father/guardianname`, `father/guardiannumber`, `address`, `datm`, `classadvisor`) VALUES
+(1, 24, 'Sudhan', '950320104025', '2005-10-20', 'B.E', 'CSE', 'Swami Raman', 2147483647, 'Adaikalapuram, Adaikalapuram', '2024-03-25 14:32:24', 'advisor@1'),
+(2, 23, 'Thesai Jebas', '950320104028', '2003-06-19', 'B.E', 'CSE', 'ThesaiFath', 2147483647, 'Adaikalapuram, Adaikalapuram', '2024-03-25 14:32:09', 'advisor@1'),
+(3, 27, 'Muthu Raman', '950320104303', '2024-03-20', 'B.Tech', 'CSE', 'MuthuVel', 2147483647, 'Tenkasi, Tenkasi', '2024-03-25 14:32:24', 'advisor@1'),
+(4, 30, 'KingKong', '123', '2024-03-19', 'B.Tech', 'CSE', 'asdas', 12312, 'asdas', '2024-03-25 14:30:43', 'advisor@1');
 
 --
 -- Indexes for dumped tables
@@ -128,13 +121,13 @@ ALTER TABLE `login`
 -- Indexes for table `permission_details`
 --
 ALTER TABLE `permission_details`
-  ADD PRIMARY KEY (`sno`);
+  ADD PRIMARY KEY (`permissiondetailsid`);
 
 --
 -- Indexes for table `student_details`
 --
 ALTER TABLE `student_details`
-  ADD PRIMARY KEY (`sno`),
+  ADD PRIMARY KEY (`studentdetailsid`),
   ADD UNIQUE KEY `rollnumber` (`rollnumber`);
 
 --
@@ -145,13 +138,19 @@ ALTER TABLE `student_details`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `permission_details`
 --
 ALTER TABLE `permission_details`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `permissiondetailsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `student_details`
+--
+ALTER TABLE `student_details`
+  MODIFY `studentdetailsid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
