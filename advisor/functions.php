@@ -47,9 +47,12 @@ if (isset($_POST["Function"])) {
         {
             $requestStatus = $_POST['requestStatus'];
             $requestId = $_POST['requestId'];
-
+            $userName = $_POST['userName'];
+            $roleName = $_POST['roleName'];
+            $acceptedOrRejectedBy = $requestStatus >= 1 ? 1 : 0;
+            $acceptedOrRejectedBy = $acceptedOrRejectedBy ? 'acceptedby' : 'rejectedby';
             global $conn;
-            $sql = "UPDATE `permission_details` SET `status` = '$requestStatus' WHERE `permission_details`.`permissiondetailsid` = $requestId";
+            $sql = "UPDATE `permission_details` SET `status` = '$requestStatus', `$acceptedOrRejectedBy` = '$userName - $roleName'  WHERE `permission_details`.`permissiondetailsid` = $requestId";
             $result = mysqli_query($conn, $sql);
             if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
             // close database connection
