@@ -14,12 +14,12 @@ if (isset($_POST["Function"])) {
             $result = mysqli_query($conn, $sql);
 
             while ($row = mysqli_fetch_assoc($result)) {
-                $password = $row['password'];
+                $actualPassword = $row['password'];
                 $userId = $row['sno'];
                 $roleName = $row['logintype'];
             }
             if (mysqli_num_rows($result) < 1) return "Account doesn't exist, register first!";
-            if ($password != $password) return "Invalid password";
+            if ($password != $actualPassword) return "Invalid password";
             $_SESSION['user_id'] = $userId;
             // close database connection
             mysqli_close($conn);
@@ -32,36 +32,22 @@ if (isset($_POST["Function"])) {
 
 if (isset($_POST["Function"])) {
 
-    if ($_POST["Function"] == "signup") {
+    if ($_POST["Function"] == "register") {
 
-        function signUp($roleName)
+        function register()
         {
-            $firstName = $_POST['fullName'];
-            $lastName = $_POST['lastName'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $department = $_POST['department'];
-            $password = password_hash($_POST['password'], PASSWORD_DEFAULT); // Hasing the password
-            $confirmPassword = $_POST['confirmPassword'];
-            if (!password_verify($confirmPassword, $password)) return "Passwords do not match!";
+            $userName = $_POST['userName'];
+            $password = $_POST['password'];
+            $role = $_POST['role'];
             global $conn;
-            $sql = "INSERT INTO erp_login (f_name, l_name, userName, phone, role,  log_pwd, active, department)
-            VALUES ('$firstName', '$lastName', '$email', '$phone', '$roleName', '$password', 0, '$department');
-            ";
+            $sql = "INSERT INTO `login` (`sno`, `username`, `password`, `logintype`) VALUES (NULL, '$userName', '$password', '$role')";
             $result = mysqli_query($conn, $sql);
-            if (!$result) echo "Error: " . $sql . "<br>" . $conn->error;
-            $sql = "SELECT user_id FROM erp_login WHERE userName = '$email'";
-            $result = mysqli_query($conn, $sql);
-            while ($row = mysqli_fetch_assoc($result)) {
-                $userId = $row["user_id"];
-            }
-            if (mysqli_num_rows($result) != 1) return "Error in acount info retrieval";
-            $_SESSION["user_id"] = $userId;
+            if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
             // close database connection
             mysqli_close($conn);
             return "OK";
         }
-        echo signUp('faculty');
+        echo register();
     }
 }
 

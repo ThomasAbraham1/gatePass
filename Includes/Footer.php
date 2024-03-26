@@ -253,6 +253,7 @@ if (isset($_SESSION['user_id'])) {
     </html>
 <?php
 } else {
-    header("Location: ../index.php");
+    header("Location: /gatePass/login.php");
+
 }
 ?>

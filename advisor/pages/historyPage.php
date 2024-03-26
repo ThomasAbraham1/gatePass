@@ -4,7 +4,7 @@ include('../Menu.php');
 
 
 // Select all pending reqeusts for Class Advisor
-$sql = "SELECT * FROM `permission_details` WHERE status>=1";
+$sql = "SELECT * FROM `permission_details` WHERE status>=2";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $pendingRequests = array();
@@ -134,18 +134,19 @@ if ($result) {
                                             $leavingDateAndTime = $request['leavingdatetime'];
                                             $outpassRequestId = $request['permissiondetailsid'];
                                             $accepetedBy = $request['acceptedby'];
-                                        }
-                                    } ?>
-                                    <tr>
-                                        <td><?php echo $studentName ?></td>
-                                        <td><?php echo $studentRollNumber ?></td>
-                                        <td><?php echo $place ?></td>
-                                        <td><?php echo $reason ?></td>
-                                        <td><?php echo $contact ?></td>
-                                        <td><?php echo $leavingDateAndTime ?></td>
-                                        <td><?php echo $accepetedBy ?></td>
-                                    </tr>
-                                <?php } ?>
+                                    ?>
+                                            <tr>
+                                                <td><?php echo $studentName ?></td>
+                                                <td><?php echo $studentRollNumber ?></td>
+                                                <td><?php echo $place ?></td>
+                                                <td><?php echo $reason ?></td>
+                                                <td><?php echo $contact ?></td>
+                                                <td><?php echo $leavingDateAndTime ?></td>
+                                                <td><?php echo $accepetedBy ?></td>
+                                            </tr>
+                                <?php           }
+                                    }
+                                } ?>
                             </tbody>
                         </table>
 
@@ -178,18 +179,20 @@ if ($result) {
                                             $leavingDateAndTime = $request['leavingdatetime'];
                                             $outpassRequestId = $request['permissiondetailsid'];
                                             $rejectedBy = $request['rejectedby'];
+                                    ?>
+                                            <tr>
+                                                <td><?php echo $studentName ?></td>
+                                                <td><?php echo $studentRollNumber ?></td>
+                                                <td><?php echo $place ?></td>
+                                                <td><?php echo $reason ?></td>
+                                                <td><?php echo $contact ?></td>
+                                                <td><?php echo $leavingDateAndTime ?></td>
+                                                <td><?php echo $rejectedBy ?></td>
+                                            </tr>
+                                <?php
                                         }
-                                    } ?>
-                                    <tr>
-                                        <td><?php echo $studentName ?></td>
-                                        <td><?php echo $studentRollNumber ?></td>
-                                        <td><?php echo $place ?></td>
-                                        <td><?php echo $reason ?></td>
-                                        <td><?php echo $contact ?></td>
-                                        <td><?php echo $leavingDateAndTime ?></td>
-                                        <td><?php echo $rejectedBy ?></td>
-                                    </tr>
-                                <?php } ?>
+                                    }
+                                } ?>
                             </tbody>
                         </table>
 

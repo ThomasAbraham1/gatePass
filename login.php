@@ -32,7 +32,7 @@
    <!-- RTL Css -->
    <link rel="stylesheet" href="/gatePass/assets/css/rtl.min.css" />
    <!-- Parsley css for form validation -->
-   <link href="/intern1/assets/css/parsley.css" rel="stylesheet" />
+   <link href="/gatePass/assets/css/parsley.css" rel="stylesheet" />
 
 
 </head>
@@ -167,7 +167,7 @@
    <!-- App Script -->
    <script src="/gatePass/assets/js/hope-ui.js" defer></script>
    <!-- Parsley.js for form validation -->
-   <script src="/intern1/assets/js/parsley.js"></script>
+   <script src="/gatePass/assets/js/parsley.js"></script>
 
    <script>
       $(document).ready(function() {
