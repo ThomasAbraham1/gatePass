@@ -108,6 +108,9 @@
                 </div>
             </div>
         </section>
+        <form id="authFormForRegistratoin" action="register.php" method="POST" hidden>
+            <input type="text" name="authStatus" value="1">
+        </form>
     </div>
 
     <!-- Library Bundle Script -->
@@ -168,7 +171,7 @@
             $("#Result").html(`<div class="alert alert-success fade show" role="alert">${secretKeyCompareResult}</div>`);
             setTimeout(function() {
                 $("#Result").html('');
-                window.location.href = "/gatePass/register.php";
+                $("#authFormForRegistratoin").submit();
             }, 2000);
         }
     });

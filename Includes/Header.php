@@ -8,12 +8,15 @@ if (isset($_SESSION['user_id'])) {
   $query = "SELECT * FROM login WHERE sno = $user_id";
   $result = mysqli_query($conn, $query);
 
+  // General ready info for users
   if ($result && mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_assoc($result);
     $userId = $row['sno'];
     $userName = $row['username'];
     $roleName = $row['logintype'];
+    $department = $row['department'];
   }
+  // Ready info for student
   if($roleName == 'student'){
     $query = "SELECT * FROM student_details WHERE sno = $user_id";
     $result = mysqli_query($conn, $query);

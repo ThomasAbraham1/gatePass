@@ -4,7 +4,7 @@ include('../Menu.php');
 
 
 // Select all pending reqeusts for Class Advisor
-$sql = "SELECT * FROM `permission_details` WHERE status=1";
+$sql = "SELECT * FROM `permission_details` WHERE status=3 ORDER BY datm";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $pendingRequests = array();
@@ -14,14 +14,40 @@ if ($result) {
 }
 
 // Getting student details to show their names in the request row
-$sql = "SELECT * FROM student_details WHERE classadvisor ='$userName'";
+$sql = "SELECT * FROM student_details";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $students = array();
+    $departments = array();
     while ($row = $result->fetch_assoc()) {
         $students[] = $row;
+        $departments[] = $row['branch'];
+    }
+    $departments = array_unique($departments);
+}
+
+$differentDepartmentStudents = array();
+foreach ($departments as $department) {
+    foreach ($students as $student) {
+        if ($department == $student['branch']) {
+            $differentDepartmentStudents[$department][] =  $student;
+        }
     }
 }
+
+// $studentsCountFromDepartments = array();
+foreach ($differentDepartmentStudents as $department => $departmentStudents) {
+    $requestCount = 0;
+    foreach ($departmentStudents as $student) {
+        foreach ($pendingRequests as $request) {
+            if ($student['sno'] == $request['sno']) {
+                $requestCount = $requestCount + 1;
+            }
+        }
+    }
+    $studentsCountFromDepartments[$department] = $requestCount;
+}
+
 
 // // Get exam names for staff's classes
 // $sql = "SELECT * FROM erp_exam";
@@ -78,6 +104,48 @@ if ($result) {
 
         <div class="bd-example">
             <div class="card-body">
+                <!-- <a href="#" class=" text-center btn btn-primary btn-icon mt-lg-0 mt-md-0 mt-3 mb-4" data-bs-toggle="modal" data-bs-target="#filterModal">
+                    <i class="btn-inner">
+                        <svg width="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="me-2 icon-20">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M4.56517 3C3.70108 3 3 3.71286 3 4.5904V5.52644C3 6.17647 3.24719 6.80158 3.68936 7.27177L8.5351 12.4243L8.53723 12.4211C9.47271 13.3788 9.99905 14.6734 9.99905 16.0233V20.5952C9.99905 20.9007 10.3187 21.0957 10.584 20.9516L13.3436 19.4479C13.7602 19.2204 14.0201 18.7784 14.0201 18.2984V16.0114C14.0201 14.6691 14.539 13.3799 15.466 12.4243L20.3117 7.27177C20.7528 6.80158 21 6.17647 21 5.52644V4.5904C21 3.71286 20.3 3 19.4359 3H4.56517Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </i>
+                    <span>Choose class</span>
+                </a> -->
+                <style>
+                    .flexContainer {
+                        display: flex;
+                        justify-content: center;
+                        /* align-items: center; */
+                        /* min-height: 100px; */
+                    }
+
+                    .numberCard {
+                        display: flex;
+                        margin: 5px 20px;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        align-items: center;
+                        min-width: 150px;
+                        border-radius: 25px;
+                        /* border: 5px solid lightblue; */
+                        box-shadow: 5px 5px 50px lightblue;
+                    }
+
+                    .numberCardBtn {
+                        border-radius: 25px;
+                    }
+                </style>
+                <div class="flexContainer">
+                    <?php foreach ($studentsCountFromDepartments as $department => $count) { ?>
+                        <div class="numberCard">
+                            <h2 class="counter mt-2 countField"><?php echo $count ?></h2>
+                            <button class="btn btn-primary numberCardBtn mb-2" department="<?php echo $department ?>"><?php echo ucfirst($department) ?></button>
+                        </div>
+                    <?php } ?>
+                </div>
+
+
                 <p id="tableHeading" class='h5 mb-4'></p>
                 <div class="table-responsive">
                     <div class="table-responsive">
@@ -93,7 +161,7 @@ if ($result) {
                                     <th>Approval</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="tableBody">
                                 <?php foreach ($pendingRequests as $request) { ?>
 
                                     <?php
@@ -126,8 +194,7 @@ if ($result) {
                                                     </div>
                                                 </td>
                                             </tr>
-                                <?php
-                                        }
+                                <?php                                         }
                                     }
                                 } ?>
                             </tbody>
@@ -139,10 +206,6 @@ if ($result) {
             </div>
         </div>
     </div>
-
-
-
-
     <!-- Modal for confirming saving the grades -->
     <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="false">
         <div class="modal-dialog">
@@ -162,9 +225,14 @@ if ($result) {
             </div>
         </div>
     </div>
+
+
     <script>
         $(document).ready(function() {
-            function accordionClickListener() {
+
+
+
+            function accordionClickListener(alreadyClickedNumberCard) {
                 $(".approvalCheckBox").click(function(e) {
                     setTimeout(function() {
                         $("#approvalConfirmBtn").focus();
@@ -173,7 +241,7 @@ if ($result) {
                     var roleName = "<?php echo $roleName ?>";
                     var currentCheckBox = $(this);
                     var isApproved = parseInt(currentCheckBox.attr("isApproved"), 10);
-                    var requestStatus = isApproved ? 2 : 0;
+                    var requestStatus = isApproved ? 4 : 0;
                     console.log(requestStatus);
                     $("#approvalConfirmBtn").unbind().click(function(e) {
                         var requestId = $(currentCheckBox).attr('requestId');
@@ -192,13 +260,30 @@ if ($result) {
                                 console.log(response);
                                 if (response == "OK") {
                                     $("#Result").html(`<div class="alert alert-success fade show" role="alert"> Aproval Set! </div>`);
+                                    $(".numberCardBtn").each(function(k, e) {
+                                        if ($(e).attr('active') == 1) {
+                                            $(e).click();
+                                            $currentCount = $(e).parent().children(":eq(0)").html();
+                                            $newCount = parseInt($currentCount, 10) - 1;
+                                            $(e).parent().children(":eq(0)").html($newCount);
+                                        }
+                                    })
+
                                     // window.location.href = "home.php";
                                 } else {
                                     $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
+                                    $(".numberCardBtn").each(function(k, e) {
+                                        if ($(e).attr('active') == 1) {
+                                            $(e).click();
+                                            $currentCount = $(e).parent().children(":eq(0)").html();
+                                            $newCount = parseInt($currentCount, 10) - 1;
+                                            $(e).parent().children(":eq(0)").html($newCount);
+                                        }
+                                    })
                                 }
                                 setTimeout(function() {
                                     $("#Result").html('');
-                                    window.location.reload();
+                                    // window.location.reload();
                                 }, 1000);
                             }
                         });
@@ -207,6 +292,42 @@ if ($result) {
             }
             accordionClickListener();
 
+
+            function filterOutpassRequestsTable() {
+                $(".numberCardBtn").click(function(e) {
+                    var department = $(this).attr('department');
+                    $(".numberCardBtn").removeAttr('active');
+                    $(this).attr('active', 1);
+                    console.log(department);
+
+                    $.ajax({
+                        url: '../functions.php',
+                        type: 'POST',
+                        data: {
+                            department: department,
+                            Function: "filterOutpassPageForPrincipal",
+                        },
+                        success: function(response) {
+                            response = response.split('|');
+                            responseData = response[0];
+                            response = response[1];
+                            console.log(responseData);
+                            if (response == "OK") {
+                                // console.log("Inside good block")
+                                $("#tableBody").html(responseData);
+                                accordionClickListener($(this));
+                            } else {
+                                $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
+                            }
+                            setTimeout(function() {
+                                $("#Result").html('');
+                                // window.location.reload();
+                            }, 1000);
+                        }
+                    });
+                });
+            }
+            filterOutpassRequestsTable();
         });
     </script>
     <?php

@@ -39,8 +39,9 @@ if (isset($_POST["Function"])) {
             $userName = $_POST['userName'];
             $password = $_POST['password'];
             $role = $_POST['role'];
+            $department = $_POST['department'];
             global $conn;
-            $sql = "INSERT INTO `login` (`sno`, `username`, `password`, `logintype`) VALUES (NULL, '$userName', '$password', '$role')";
+            $sql = "INSERT INTO `login` (`sno`, `username`, `password`, `logintype`, `department`) VALUES (NULL, '$userName', '$password', '$role', '$department')";
             $result = mysqli_query($conn, $sql);
             if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
             // close database connection

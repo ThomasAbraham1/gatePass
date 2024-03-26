@@ -4,7 +4,7 @@ include('../Menu.php');
 
 
 // Select all pending reqeusts for Class Advisor
-$sql = "SELECT * FROM `permission_details` WHERE status=1";
+$sql = "SELECT * FROM `permission_details` WHERE status=2";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $pendingRequests = array();
@@ -14,7 +14,7 @@ if ($result) {
 }
 
 // Getting student details to show their names in the request row
-$sql = "SELECT * FROM student_details WHERE classadvisor ='$userName'";
+$sql = "SELECT * FROM student_details WHERE branch='$department'";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $students = array();
@@ -78,6 +78,7 @@ if ($result) {
 
         <div class="bd-example">
             <div class="card-body">
+
                 <p id="tableHeading" class='h5 mb-4'></p>
                 <div class="table-responsive">
                     <div class="table-responsive">
@@ -126,8 +127,7 @@ if ($result) {
                                                     </div>
                                                 </td>
                                             </tr>
-                                <?php
-                                        }
+                                <?php                                         }
                                     }
                                 } ?>
                             </tbody>
@@ -173,7 +173,7 @@ if ($result) {
                     var roleName = "<?php echo $roleName ?>";
                     var currentCheckBox = $(this);
                     var isApproved = parseInt(currentCheckBox.attr("isApproved"), 10);
-                    var requestStatus = isApproved ? 2 : 0;
+                    var requestStatus = isApproved ? 3 : 0;
                     console.log(requestStatus);
                     $("#approvalConfirmBtn").unbind().click(function(e) {
                         var requestId = $(currentCheckBox).attr('requestId');
