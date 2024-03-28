@@ -228,6 +228,8 @@
                         if(response == 'principal') window.location.href = "/gatePass/" + response+ "/pages/homePage.php";
                         if(response == 'student') window.location.href = "/gatePass/" + response+ "/pages/homePage.php";
                         if(response == 'advisor') window.location.href = "/gatePass/" + response+ "/pages/homePage.php";
+                        if(response == 'security') window.location.href = "/gatePass/" + response+ "/pages/homePage.php";
+
                      } else {
                         $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${responseMsg}</div>`);
                      }

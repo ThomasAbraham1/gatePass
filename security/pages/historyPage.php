@@ -4,7 +4,7 @@ include('../Menu.php');
 
 
 // Select all pending reqeusts for Class Advisor
-$sql = "SELECT * FROM `permission_details` WHERE status=1";
+$sql = "SELECT * FROM `permission_details` WHERE status>=5";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $pendingRequests = array();
@@ -14,12 +14,34 @@ if ($result) {
 }
 
 // Getting student details to show their names in the request row
-$sql = "SELECT * FROM student_details WHERE classadvisor ='$userName'";
+$sql = "SELECT * FROM student_details";
 $result = mysqli_query($conn, $sql);
 if ($result) {
     $students = array();
     while ($row = $result->fetch_assoc()) {
         $students[] = $row;
+    }
+}
+
+
+// Duplicated for 2nd table ( History - rejected )
+// Select all pending reqeusts for Class Advisor
+$sql = "SELECT * FROM `permission_details` WHERE rejectedby ='$userName - $roleName'";
+$result = mysqli_query($conn, $sql);
+if ($result) {
+    $pendingRequests2 = array();
+    while ($row = $result->fetch_assoc()) {
+        $pendingRequests2[] = $row;
+    }
+}
+
+// Getting student details to show their names in the request row
+$sql = "SELECT * FROM student_details";
+$result = mysqli_query($conn, $sql);
+if ($result) {
+    $students2 = array();
+    while ($row = $result->fetch_assoc()) {
+        $students2[] = $row;
     }
 }
 
@@ -35,15 +57,14 @@ if ($result) {
 
 ?>
 
-
 <div class="iq-navbar-header" style="height: 215px;">
     <div class="container-fluid iq-container">
         <div class="row">
             <div class="col-md-12">
                 <div class="flex-wrap d-flex justify-content-between align-items-center">
                     <div>
-                        <h1>Outpass Requests</h1>
-                        <p>Faculties can handle the incoming outpass requests from students here.</p>
+                        <h1>History</h1> <?php echo "$userName - $roleName" ?>
+                        <p>All the outpass forms accepted and denied by you can be found here, like a history page.</p>
                     </div>
                     <!-- Button on the header -->
                     <!-- <div>
@@ -71,16 +92,21 @@ if ($result) {
 
 
 
-<div class="card m-3 w-100 text ">
+<div class="card m-3 mb-4 text outerMostCard">
     <div id="Result" class="mt-2" style="width:30%; position:absolute;left:60%; top:0%">
     </div>
     <div class="card-body">
 
         <div class="bd-example">
             <div class="card-body">
-                <p id="tableHeading" class='h5 mb-4'></p>
-                <div class="table-responsive">
-                    <div class="table-responsive">
+                <div class="form-group col-md-12 justify-content-center">
+                    <label class="form-label h4" for="datm">Toggle History:</label>
+                    <button type="button" id="toggleAcceptsRejectsBtn" class="btn btn-primary">Accepts / Rejects</button>
+                </div>
+
+                <p id="tableHeading" class='h5 mb-4'> Showing accepeted outpass forms </p>
+                <div class="table-responsive ">
+                    <div id="acceptedTable" class="table-responsive acceptedTable">
                         <table id="datatable" class="table table-striped mb-4" data-toggle="data-table">
                             <thead>
                                 <tr>
@@ -90,11 +116,10 @@ if ($result) {
                                     <th>Reason</th>
                                     <th>Contact</th>
                                     <th>Leaving Date And Time</th>
-                                    <th>Approval</th>
+                                    <th>Accepted By</th>
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <?php foreach ($pendingRequests as $request) { ?>
 
                                     <?php
@@ -108,6 +133,7 @@ if ($result) {
                                             $contact = $request['contactnumber'];
                                             $leavingDateAndTime = $request['leavingdatetime'];
                                             $outpassRequestId = $request['permissiondetailsid'];
+                                            $accepetedBy = $request['acceptedby'];
                                     ?>
                                             <tr>
                                                 <td><?php echo $studentName ?></td>
@@ -116,23 +142,58 @@ if ($result) {
                                                 <td><?php echo $reason ?></td>
                                                 <td><?php echo $contact ?></td>
                                                 <td><?php echo $leavingDateAndTime ?></td>
-                                                <td>
-                                                    <div class="form-check form-check-inline">
-                                                        <input type="radio" class="form-check-input approvalCheckBox" name="bsradio" data-bs-toggle="modal" data-bs-target="#approvalModal" requestId=<?php echo $outpassRequestId ?> isApproved=1>
-                                                        <label for="radio1" class="form-check-label pl-2">Accept</label>
-                                                    </div>
-                                                    <div class="form-check form-check-inline">
-                                                        <input type="radio" class="form-check-input approvalCheckBox" name="bsradio" data-bs-toggle="modal" data-bs-target="#approvalModal" requestId=<?php echo $outpassRequestId ?> isApproved=0>
-                                                        <label for="radio1" class="form-check-label pl-2">Reject</label>
-                                                    </div>
-                                                </td>
+                                                <td><?php echo $accepetedBy ?></td>
+                                            </tr>
+                                <?php           }
+                                    }
+                                } ?>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div id="rejectedTable" class="table-responsive rejectedTable" hidden='true'>
+                        <table id="datatable" class="table table-striped mb-4" data-toggle="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Roll Number</th>
+                                    <th>Place</th>
+                                    <th>Reason</th>
+                                    <th>Contact</th>
+                                    <th>Leaving Date And Time</th>
+                                    <th>Rejected By</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php foreach ($pendingRequests2 as $request) { ?>
+
+                                    <?php
+                                    foreach ($students2 as $student) {
+                                        if ($student['sno'] == $request['sno']) {
+                                            $studentName = $student['studentname'];
+                                            $studentRollNumber = $student['rollnumber'];
+                                            $permissionType = $request['permissiontype'];
+                                            $place = $request['place'];
+                                            $reason = $request['reason'];
+                                            $contact = $request['contactnumber'];
+                                            $leavingDateAndTime = $request['leavingdatetime'];
+                                            $outpassRequestId = $request['permissiondetailsid'];
+                                            $rejectedBy = $request['rejectedby'];
+                                    ?>
+                                            <tr>
+                                                <td><?php echo $studentName ?></td>
+                                                <td><?php echo $studentRollNumber ?></td>
+                                                <td><?php echo $place ?></td>
+                                                <td><?php echo $reason ?></td>
+                                                <td><?php echo $contact ?></td>
+                                                <td><?php echo $leavingDateAndTime ?></td>
+                                                <td><?php echo $rejectedBy ?></td>
                                             </tr>
                                 <?php
                                         }
                                     }
                                 } ?>
                             </tbody>
-
                         </table>
 
                     </div>
@@ -165,48 +226,49 @@ if ($result) {
     </div>
     <script>
         $(document).ready(function() {
-            function accordionClickListener() {
-                $(".approvalCheckBox").click(function(e) {
-                    setTimeout(function() {
-                        $("#approvalConfirmBtn").focus();
-                    }, 600);
-                    var userName = "<?php echo $userName ?>";
-                    var roleName = "<?php echo $roleName ?>";
-                    var currentCheckBox = $(this);
-                    var isApproved = parseInt(currentCheckBox.attr("isApproved"), 10);
-                    var requestStatus = isApproved ? 2 : 0;
-                    console.log(requestStatus);
-                    $("#approvalConfirmBtn").unbind().click(function(e) {
-                        var requestId = $(currentCheckBox).attr('requestId');
-                        console.log(requestId);
-                        $.ajax({
-                            url: '../functions.php',
-                            type: 'POST',
-                            data: {
-                                requestStatus: requestStatus,
-                                roleName: roleName,
-                                userName: userName,
-                                requestId: requestId,
-                                Function: "setStaffApproval",
-                            },
-                            success: function(response) {
-                                console.log(response);
-                                if (response == "OK") {
-                                    $("#Result").html(`<div class="alert alert-success fade show" role="alert"> Aproval Set! </div>`);
-                                    // window.location.href = "home.php";
-                                } else {
-                                    $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
-                                }
-                                setTimeout(function() {
-                                    $("#Result").html('');
-                                    window.location.reload();
-                                }, 1000);
-                            }
-                        });
-                    })
-                });
-            }
-            accordionClickListener();
+            $(".outerMostCard").css("box-shadow", "5px 5px 30px blue");
+            $("#toggleAcceptsRejectsBtn").click(function(e) {
+                if ($("#rejectedTable").attr('hidden') == 'hidden') {
+                    $("#acceptedTable").attr('hidden', true);
+                    $("#rejectedTable").attr('hidden', false);
+                    $("#tableHeading").html('Showing Rejected OutPass Forms');
+                    $("#toggleAcceptsRejectsBtn").addClass("btn-danger").removeClass("btn-primary");
+                    $(".outerMostCard").css("box-shadow", "5px 5px 30px red");
+                } else {
+                    $("#rejectedTable").attr('hidden', true);
+                    $("#acceptedTable").attr('hidden', false);
+                    $("#tableHeading").html('Showing Accepted OutPass Forms');
+                    $("#toggleAcceptsRejectsBtn").addClass("btn-primary").removeClass("btn-danger");
+                    $(".outerMostCard").css("box-shadow", "5px 5px 30px blue");
+                }
+
+                // $("#approvalConfirmBtn").unbind().click(function(e) {
+                //     var requestId = $(currentCheckBox).attr('requestId');
+                //     console.log(requestId);
+                //     $.ajax({
+                //         url: '../functions.php',
+                //         type: 'POST',
+                //         data: {
+                //             requestStatus: requestStatus,
+                //             requestId: requestId,
+                //             Function: "setStaffApproval",
+                //         },
+                //         success: function(response) {
+                //             console.log(response);
+                //             if (response == "OK") {
+                //                 $("#Result").html(`<div class="alert alert-success fade show" role="alert"> Aproval Set! </div>`);
+                //                 // window.location.href = "home.php";
+                //             } else {
+                //                 $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
+                //             }
+                //             setTimeout(function() {
+                //                 $("#Result").html('');
+                //                 window.location.reload();
+                //             }, 1000);
+                //         }
+                //     });
+                // })
+            });
 
         });
     </script>
