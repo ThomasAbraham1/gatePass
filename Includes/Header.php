@@ -93,44 +93,6 @@ if (isset($_SESSION['user_id'])) {
 
    
 
-<!-- scripts -->
-
-
-    <!-- Library Bundle Script -->
-    <script src="/gatePass/assets/js/core/libs.min.js"></script>
-
-    <!-- External Library Bundle Script -->
-    <script src="/gatePass/assets/js/core/external.min.js"></script>
-
-    <!-- Widgetchart Script -->
-    <script src="/gatePass/assets/js/charts/widgetcharts.js"></script>
-
-    <!-- mapchart Script -->
-    <script src="/gatePass/assets/js/charts/vectore-chart.js"></script>
-    <script src="/gatePass/assets/js/charts/apexchart.js"></script>
-    <script src="/gatePass/assets/js/charts/dashboard.js"></script>
-
-    <!-- fslightbox Script -->
-    <script src="/gatePass/assets/js/plugins/fslightbox.js"></script>
-
-    <!-- Settings Script -->
-    <script src="/gatePass/assets/js/plugins/setting.js"></script>
-
-    <!-- Slider-tab Script -->
-    <script src="/gatePass/assets/js/plugins/slider-tabs.js"></script>
-
-    <!-- Form Wizard Script -->
-    <script src="/gatePass/assets/js/plugins/form-wizard.js"></script>
-
-    <!-- AOS Animation Plugin-->
-    <script src="/gatePass/assets/vendor/aos/dist/aos.js"></script>
-
-    <!-- App Script -->
-    <script src="/gatePass/assets/js/hope-ui.js" defer></script>
-
-    <!-- Parsley.js for form validation -->
-    <script src="/gatePass/assets/js/parsley.js"></script>
-
 
   </head>
 
