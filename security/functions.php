@@ -70,7 +70,7 @@ if (isset($_POST["Function"])) {
         {
             $department = $_POST['department'];
             global $conn;
-            $sql = "SELECT * FROM `permission_details` INNER JOIN student_details On permission_details.sno = student_details.sno WHERE status=3 AND branch = '$department'";
+            $sql = "SELECT * FROM `permission_details` INNER JOIN student_details On permission_details.sno = student_details.sno WHERE status=4 AND branch = '$department'";
             $result = mysqli_query($conn, $sql);
             if (!$result) return "Error: " . $sql . "<br>" . $conn->error;
             if ($result) {
@@ -81,38 +81,33 @@ if (isset($_POST["Function"])) {
             }
 
 ?>
-                    <?php foreach ($outpassRequests as $request) { ?>
+            <?php foreach ($outpassRequests as $request) { ?>
 
-                        <?php
-                        $studentName = $request['studentname'];
-                        $studentRollNumber = $request['rollnumber'];
-                        $permissionType = $request['permissiontype'];
-                        $place = $request['place'];
-                        $reason = $request['reason'];
-                        $contact = $request['contactnumber'];
-                        $leavingDateAndTime = $request['leavingdatetime'];
-                        $outpassRequestId = $request['permissiondetailsid'];
-                        ?>
-                        <tr>
-                            <td><?php echo $studentName ?></td>
-                            <td><?php echo $studentRollNumber ?></td>
-                            <td><?php echo $place ?></td>
-                            <td><?php echo $reason ?></td>
-                            <td><?php echo $contact ?></td>
-                            <td><?php echo $leavingDateAndTime ?></td>
-                            <td>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input approvalCheckBox" name="bsradio" data-bs-toggle="modal" data-bs-target="#approvalModal" requestId=<?php echo $outpassRequestId ?> isApproved=1>
-                                    <label for="radio1" class="form-check-label pl-2">Accept</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input type="radio" class="form-check-input approvalCheckBox" name="bsradio" data-bs-toggle="modal" data-bs-target="#approvalModal" requestId=<?php echo $outpassRequestId ?> isApproved=0>
-                                    <label for="radio1" class="form-check-label pl-2">Reject</label>
-                                </div>
-                            </td>
-                        </tr>
-                    <?php
-                    } ?>
+                <?php
+                $studentName = $request['studentname'];
+                $studentRollNumber = $request['rollnumber'];
+                $permissionType = $request['permissiontype'];
+                $place = $request['place'];
+                $reason = $request['reason'];
+                $contact = $request['contactnumber'];
+                $leavingDateAndTime = $request['leavingdatetime'];
+                $outpassRequestId = $request['permissiondetailsid'];
+                ?>
+                <tr>
+                    <td><?php echo $studentName ?></td>
+                    <td><?php echo $studentRollNumber ?></td>
+                    <td><?php echo $place ?></td>
+                    <td><?php echo $reason ?></td>
+                    <td><?php echo $contact ?></td>
+                    <td><?php echo $leavingDateAndTime ?></td>
+                    <td>
+                        <div class="form-check form-check-inline">
+                            <input id="printOutpassBtn" type="button" class="btn btn-primary approvalCheckBox" value="Print" requestId=<?php echo $outpassRequestId ?> isApproved=1></input>
+                        </div>
+                    </td>
+                </tr>
+            <?php
+            } ?>
 
 <?php
             // close database connection

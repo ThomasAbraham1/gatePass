@@ -169,6 +169,7 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
                                         if ($student['sno'] == $request['sno']) {
                                             $studentName = $student['studentname'];
                                             $studentRollNumber = $student['rollnumber'];
+                                            $studentDepartment = $student['branch'];
                                             $permissionType = $request['permissiontype'];
                                             $place = $request['place'];
                                             $reason = $request['reason'];
@@ -185,10 +186,9 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
                                                 <td><?php echo $leavingDateAndTime ?></td>
                                                 <td>
                                                     <div class="form-check form-check-inline">
-                                                        <input type="button" class="form-check-input approvalCheckBox" name="bsradio" data-bs-toggle="modal" data-bs-target="#approvalModal" requestId=<?php echo $outpassRequestId ?> isApproved=1>
-                                                        <label for="" class="form-check-label pl-2">PRINT</label>
+                                                        <input id="printOutpassBtn" type="button" class="btn btn-primary approvalCheckBox" value="Print" requestId=<?php echo $outpassRequestId ?> studentDepartment=<?php echo $studentDepartment ?> isApproved=1></input>
                                                     </div>
-                                                    
+
                                                 </td>
                                             </tr>
                                 <?php                                         }
@@ -203,7 +203,7 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
             </div>
         </div>
     </div>
-    <!-- Modal for confirming saving the grades -->
+    <!-- Modal for confirming saving the grades
     <div class="modal fade" id="approvalModal" tabindex="-1" aria-labelledby="exampleModal2Label" aria-hidden="false">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -221,7 +221,7 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
                 <div id="saveGradesResult"></div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
     <script>
@@ -231,60 +231,65 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
 
             function accordionClickListener(alreadyClickedNumberCard) {
                 $(".approvalCheckBox").click(function(e) {
-                    setTimeout(function() {
-                        $("#approvalConfirmBtn").focus();
-                    }, 600);
                     var userName = "<?php echo $userName ?>";
                     var roleName = "<?php echo $roleName ?>";
                     var currentCheckBox = $(this);
                     var isApproved = parseInt(currentCheckBox.attr("isApproved"), 10);
                     var requestStatus = isApproved ? 5 : 0;
                     console.log(requestStatus);
-                    $("#approvalConfirmBtn").unbind().click(function(e) {
-                        var requestId = $(currentCheckBox).attr('requestId');
-                        console.log(requestId);
-                        $.ajax({
-                            url: '../functions.php',
-                            type: 'POST',
-                            data: {
-                                requestStatus: requestStatus,
-                                roleName: roleName,
-                                userName: userName,
-                                requestId: requestId,
-                                Function: "setStaffApproval",
-                            },
-                            success: function(response) {
-                                console.log(response);
-                                if (response == "OK") {
-                                    $("#Result").html(`<div class="alert alert-success fade show" role="alert"> Aproval Set! </div>`);
-                                    $(".numberCardBtn").each(function(k, e) {
-                                        if ($(e).attr('active') == 1) {
-                                            $(e).click();
-                                            $currentCount = $(e).parent().children(":eq(0)").html();
-                                            $newCount = parseInt($currentCount, 10) - 1;
-                                            $(e).parent().children(":eq(0)").html($newCount);
-                                        }
-                                    })
+                    var requestId = $(currentCheckBox).attr('requestId');
+                    var studentDepartment = $(this).attr('studentDepartment');
 
-                                    // window.location.href = "home.php";
-                                } else {
-                                    $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
-                                    $(".numberCardBtn").each(function(k, e) {
-                                        if ($(e).attr('active') == 1) {
-                                            $(e).click();
-                                            $currentCount = $(e).parent().children(":eq(0)").html();
-                                            $newCount = parseInt($currentCount, 10) - 1;
-                                            $(e).parent().children(":eq(0)").html($newCount);
-                                        }
-                                    })
-                                }
-                                setTimeout(function() {
-                                    $("#Result").html('');
-                                    // window.location.reload();
-                                }, 1000);
+                    console.log(studentDepartment);
+                    $.ajax({
+                        url: '../functions.php',
+                        type: 'POST',
+                        data: {
+                            requestStatus: requestStatus,
+                            roleName: roleName,
+                            userName: userName,
+                            requestId: requestId,
+                            Function: "setStaffApproval",
+                        },
+                        success: function(response) {
+                            console.log(response);
+                            if (response == "OK") {
+                                $("#Result").html(`<div class="alert alert-success fade show" role="alert"> Aproval Set! </div>`);
+                                var filterPageOrNotFlag = 0;
+                                $(".numberCardBtn").each(function(k, e) {
+                                    if ($(e).attr('active') == 1) {
+                                        filterPageOrNotFlag = 1;
+                                        $(e).click();
+                                        $currentCount = $(e).parent().children(":eq(0)").html();
+                                        $newCount = parseInt($currentCount, 10) - 1;
+                                        $(e).parent().children(":eq(0)").html($newCount);
+                                    }
+                                    if(!filterPageOrNotFlag) window.location.reload();
+
+                                })
+
+                                // window.location.href = "home.php";
+                            } else {
+                                $("#Result").html(`<div class="alert alert-danger fade show" role="alert"> ${response}</div>`);
+                                var filterPageOrNotFlag = 0;
+
+                                $(".numberCardBtn").each(function(k, e) {
+                                    if ($(e).attr('active') == 1) {
+                                        filterPageOrNotFlag = 1;
+                                        $(e).click();
+                                        $currentCount = $(e).parent().children(":eq(0)").html();
+                                        $newCount = parseInt($currentCount, 10) - 1;
+                                        $(e).parent().children(":eq(0)").html($newCount);
+                                    }
+                                    if(!filterPageOrNotFlag) window.location.reload();
+                                })
                             }
-                        });
-                    })
+                            setTimeout(function() {
+                                $("#Result").html('');
+                                // window.location.reload();
+                            }, 1000);
+                        }
+                    });
                 });
             }
             accordionClickListener();
