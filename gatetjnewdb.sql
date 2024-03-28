@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 26, 2024 at 04:47 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Host: localhost:3306
+-- Generation Time: Mar 28, 2024 at 12:20 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 7.4.23
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -93,19 +93,19 @@ CREATE TABLE `permission_details` (
 --
 
 INSERT INTO `permission_details` (`permissiondetailsid`, `sno`, `rollnumber`, `permissiontype`, `leavingdatetime`, `place`, `reason`, `contactnumber`, `status`, `outtime`, `datm`, `acceptedby`, `rejectedby`) VALUES
-(1, 23, '950320104028', 'Home Permission', '2024-03-20T18:31', 'Super market', 'Going shopping', '982392834', '0', '', '2024-03-26 15:39:35', 'principal - principal', 'hod@1 - hod'),
-(2, 24, '950320104025', 'Home Permission', '2024-03-25T18:32', 'Temple', 'Have fun in Kovil Thiruvila', '21830985', '0', '', '2024-03-26 15:39:40', 'principal - principal', 'advisor@1 - advisor'),
-(3, 27, '950320104303', 'Home Permission', '2024-03-25T19:09', 'Tenkasi', 'Tea shop with area boys', '90812342342', '0', '', '2024-03-26 15:39:43', 'principal - principal', ''),
-(6, 36, '950320104007', 'Home Permission', '2024-03-26T13:44', 'DSF Plaza', 'Shopping with family', '824987483', '0', '', '2024-03-26 15:39:45', 'principal - principal', 'advisor2@1 - advisor'),
-(7, 38, '950320104014', 'Home Permission', '2024-03-26T13:56', 'Nagercoil', 'Granderfather\'s burial', '94434343', '0', '', '2024-03-26 15:05:26', 'advisor2@1 - advisor', 'principal - principal'),
-(8, 39, '950320104015', 'Home Permission', '2024-03-26T13:59', 'Kerala', 'Going to relative\'s place', '98498349', '0', '', '2024-03-26 15:39:47', 'principal - principal', 'advisor2@1 - advisor'),
-(9, 39, '950320104015', 'Home Permission', '2024-03-27T14:06', 'Home', 'Leaving after exam', '7898778987', '0', '', '2024-03-26 15:06:33', '', 'principal - principal'),
-(10, 49, '950320104002', 'Home Permission', '2024-03-26T18:04', 'Planet Fitness Gym', 'Workout time', '98498394', '0', '', '2024-03-26 15:39:50', '', 'advisor4@1 - advisor'),
-(11, 48, '950320104001', 'Home Permission', '2024-03-26T18:05', 'Disney Land', 'Going on a vacation', '98498343', '0', '', '2024-03-26 15:39:52', 'principal - principal', ''),
-(12, 48, '950320104001', 'Home Permission', '2024-03-26T18:06', 'Gaming Center', 'Training for aceing a round in valorant', '982391283', '0', '', '2024-03-26 15:39:53', 'principal - principal', 'hod2@1 - hod'),
-(13, 51, '950320104004', 'Home Permission', '2024-03-26T18:06', 'Heaven', 'It\'s time', '983429843', '0', '', '2024-03-26 15:39:55', 'principal - principal', ''),
-(14, 52, '950320104005', 'Home Permission', '2024-03-26T18:07', 'Devil\'s kitchen', 'Becoming a vigilantee', '983294893', '0', '', '2024-03-26 15:39:57', 'hod1@1 - hod', ''),
-(15, 53, '950320104006', 'Home Permission', '2024-03-26T18:07', 'Arkham City', 'To spend time with Batman', '90238492', '0', '', '2024-03-26 15:33:32', 'advisor3@1 - advisor', 'principal - principal');
+(1, 23, '950320104028', 'Home Permission', '2024-03-20T18:31', 'Super market', 'Going shopping', '982392834', '4', '', '2024-03-26 16:12:30', 'principal - principal', 'hod@1 - hod'),
+(2, 24, '950320104025', 'Home Permission', '2024-03-25T18:32', 'Temple', 'Have fun in Kovil Thiruvila', '21830985', '1', '', '2024-03-28 11:18:59', 'principal - principal', 'advisor@1 - advisor'),
+(3, 27, '950320104303', 'Home Permission', '2024-03-25T19:09', 'Tenkasi', 'Tea shop with area boys', '90812342342', '4', '', '2024-03-28 11:47:15', 'principal - principal', 'hod1@1 - hod'),
+(6, 36, '950320104007', 'Home Permission', '2024-03-26T13:44', 'DSF Plaza', 'Shopping with family', '824987483', '1', '', '2024-03-26 16:01:56', 'principal - principal', 'advisor2@1 - advisor'),
+(7, 38, '950320104014', 'Home Permission', '2024-03-26T13:56', 'Nagercoil', 'Granderfather\'s burial', '94434343', '1', '', '2024-03-26 16:02:01', 'advisor2@1 - advisor', 'principal - principal'),
+(8, 39, '950320104015', 'Home Permission', '2024-03-26T13:59', 'Kerala', 'Going to relative\'s place', '98498349', '1', '', '2024-03-26 16:02:04', 'principal - principal', 'advisor2@1 - advisor'),
+(9, 39, '950320104015', 'Home Permission', '2024-03-27T14:06', 'Home', 'Leaving after exam', '7898778987', '1', '', '2024-03-26 16:02:08', '', 'principal - principal'),
+(10, 49, '950320104002', 'Home Permission', '2024-03-26T18:04', 'Planet Fitness Gym', 'Workout time', '98498394', '1', '', '2024-03-26 16:02:12', '', 'advisor4@1 - advisor'),
+(11, 48, '950320104001', 'Home Permission', '2024-03-26T18:05', 'Disney Land', 'Going on a vacation', '98498343', '1', '', '2024-03-26 16:02:15', 'principal - principal', ''),
+(12, 48, '950320104001', 'Home Permission', '2024-03-26T18:06', 'Gaming Center', 'Training for aceing a round in valorant', '982391283', '1', '', '2024-03-26 16:02:18', 'principal - principal', 'hod2@1 - hod'),
+(13, 51, '950320104004', 'Home Permission', '2024-03-26T18:06', 'Heaven', 'It\'s time', '983429843', '1', '', '2024-03-26 16:02:20', 'principal - principal', ''),
+(14, 52, '950320104005', 'Home Permission', '2024-03-26T18:07', 'Devil\'s kitchen', 'Becoming a vigilantee', '983294893', '1', '', '2024-03-26 16:02:25', 'hod1@1 - hod', ''),
+(15, 53, '950320104006', 'Home Permission', '2024-03-26T18:07', 'Arkham City', 'To spend time with Batman', '90238492', '1', '', '2024-03-26 16:02:31', 'advisor3@1 - advisor', 'principal - principal');
 
 -- --------------------------------------------------------
 
@@ -179,7 +179,7 @@ ALTER TABLE `student_details`
 -- AUTO_INCREMENT for table `login`
 --
 ALTER TABLE `login`
-  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `sno` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `permission_details`
