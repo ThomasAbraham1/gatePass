@@ -186,7 +186,7 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
                                                 <td><?php echo $leavingDateAndTime ?></td>
                                                 <td>
                                                     <div class="form-check form-check-inline">
-                                                        <input id="printOutpassBtn" type="button" class="btn btn-primary approvalCheckBox" value="Print" requestId=<?php echo $outpassRequestId ?> studentDepartment=<?php echo $studentDepartment ?> isApproved=1></input>
+                                                        <input id="printOutpassBtn" type="button" class="btn btn-primary approvalCheckBox" value="Print"  requestId=<?php echo $outpassRequestId ?> studentDepartment=<?php echo $studentDepartment ?> isApproved=1></input>
                                                     </div>
 
                                                 </td>
@@ -330,8 +330,20 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
                 });
             }
             filterOutpassRequestsTable();
+
+            
         });
     </script>
+<script>
+     document.addEventListener('keydown', function(event) {
+    // Check if the pressed key is lowercase 'p'
+    if (event.key === 'p') {
+        // Simulate a click on the button with id 'printOutpassBtn'
+        document.getElementById('printOutpassBtn').click();
+    }
+});
+</script>
+
     <?php
     include($_SERVER['DOCUMENT_ROOT'] . '/gatePass/Includes/Footer.php');
 
