@@ -82,7 +82,7 @@
 
 
 
-                              <h4 class="logo-title ms-3">CMS</h4>
+                              <h4 class="logo-title ms-3">GTMS</h4>
                            </a>
                            <h2 class="mb-2 text-center">Gate Pass Log In</h2>
                            <p class="text-center">Login to stay connected.</p>

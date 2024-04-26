@@ -185,9 +185,11 @@ foreach ($differentDepartmentStudents as $department => $departmentStudents) {
                                                 <td><?php echo $contact ?></td>
                                                 <td><?php echo $leavingDateAndTime ?></td>
                                                 <td>
-                                                    <div class="form-check form-check-inline">
+                                                    <!-- <div class="form-check form-check-inline">
                                                         <input id="printOutpassBtn" type="button" class="btn btn-primary approvalCheckBox" value="Print"  requestId=<?php echo $outpassRequestId ?> studentDepartment=<?php echo $studentDepartment ?> isApproved=1></input>
-                                                    </div>
+                                                    </div> -->
+                                                    <a href="print.php?q=<?php echo $outpassRequestId ?>" class="btn btn-primary approvalCheckBox" id="printOutpassBtn">Print</a>
+
 
                                                 </td>
                                             </tr>
