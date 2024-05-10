@@ -8,7 +8,7 @@ use Mike42\Escpos\CapabilityProfile;
 use Mike42\Escpos\EscposImage;
 
 // Include your database connection file
-include 'connect.php';
+include 'conn.php';
 
 // Check if the request ID is set in the query string
 if (!isset($_GET['q'])) {

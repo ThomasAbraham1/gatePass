@@ -7,7 +7,7 @@ if (isset($_GET["Menu"])) {
 ?>
 <aside class="sidebar sidebar-default sidebar-white sidebar-base navs-rounded-all ">
   <div class="sidebar-header d-flex align-items-center justify-content-start">
-    <a href="../dashboard/index.html" class="navbar-brand">
+    <a href="" class="navbar-brand">
       <!--Logo start-->
       <!--logo End-->
 

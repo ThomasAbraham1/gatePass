@@ -154,7 +154,7 @@
 
         function compareSecretCode() {
             var secretCode = $("#secretCode").val();
-            var key = "ihatewaitingforoutpass"
+            var key = "gracecoe"
             if (secretCode != key) return "Wrong Secret Code, try again bozo!"
             flag = 1;
             return "Right away you go!"

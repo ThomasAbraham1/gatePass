@@ -97,6 +97,7 @@ if ($result) {
                                     <th>Reason</th>
                                     <th>Contact</th>
                                     <th>Leaving Date And Time</th>
+                                    <th>Rejected By</th>
                                     <th>Accepted By</th>
                                 </tr>
                             </thead>
@@ -114,6 +115,7 @@ if ($result) {
                                             $contact = $request['contactnumber'];
                                             $leavingDateAndTime = $request['leavingdatetime'];
                                             $outpassRequestId = $request['permissiondetailsid'];
+                                            $rejectedBy=$request['rejectedby'] ;
                                             $acceptedBy = $request['acceptedby'];
                                     ?>
                                             <tr>
@@ -123,12 +125,11 @@ if ($result) {
                                                 <td><?php echo $reason ?></td>
                                                 <td><?php echo $contact ?></td>
                                                 <td><?php echo $leavingDateAndTime ?></td>
-                                                <td>
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
-                                                        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                                    </div>
-                                                </td>
+                                                <td><?php echo $rejectedBy ?></td>
+                                                <td><?php echo $acceptedBy ?></td>
+
+                                                <!-- <td><?php echo substr(strrchr($rejectedBy,'-'),1) ?></td> -->
+                                                <!-- <td><?php echo substr(strrchr($acceptedBy,'-'),1) ?></td> -->
 
                                             </tr>
                                 <?php           }

@@ -52,7 +52,7 @@ if (isset($_SESSION['user_id'])) {
                 </script> Grace College of Engineering,
                 <span class="">
 
-                </span> by <a href="https://iqonic.design/">Tom Inc</a>.
+                </span> by <a href="https://iqonic.design/">GTMS</a>.
             </div>
         </div>
     </footer>
